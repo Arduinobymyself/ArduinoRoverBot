@@ -1,6 +1,6 @@
 /*
 #####################################################################################
-#  	File name:          Arduino_Rover_bluetooth_V5
+#  	File name:          Arduino_Rover_bluetooth_4
 #       Processor:          Arduino UNO, MEGA ou Teensy++ 2.0      
 #  	Language:	    Wiring / C /Processing /Fritzing / Arduino IDE          
 #						
@@ -21,7 +21,6 @@
   
  */
 
-
 //Libraries
 #include <AFMotor.h>
 
@@ -34,15 +33,10 @@ char dataIn = 'S';
 char determinant;
 char det;
 int vel = 0; //Bluetooth Stuff
-int frontLight = 13;
-int horn = 2;
 
 
 void setup() {
   Serial.begin(9600); // set up Serial library at 9600 bps
-  
-  pinMode(frontLight, OUTPUT);
-  pinMode(horn, OUTPUT);
   
   //Initalization messages
   Serial.println("ArduinoBymyself - ROVERBot");
@@ -54,8 +48,7 @@ void setup() {
   motorRight.run(RELEASE);
   motorLeft.run(RELEASE);
   
-  digitalWrite(frontLight, LOW);
-  noTone(horn);
+  
 
 }
 
@@ -136,26 +129,7 @@ void loop() {
     det = check();
     break;
     
-
-    case 'V': // V, Horn On
-    //Serial.println("Horn On");
-    tone(horn, 800, 100);
-    break;
     
-    case 'v': //v, Horn Off
-    //Serial.println("Horn Off");
-    noTone(horn);
-    break;
-    
-    case 'W': //W, Front Lights On
-    //Serial.println("Front Lights On");
-    digitalWrite(frontLight, HIGH);
-    break;
-    
-    case 'w': //w, Front Lights Off
-    //Serial.println("Front Lights Off");    
-    digitalWrite(frontLight, LOW);
-    break;
     
   }
 }
